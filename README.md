@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+---
+title: Ayush Gandhi Portfolio
+description: Personal portfolio website built with React, TypeScript, and Vite that highlights full-stack and AI-powered product development.
+---
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About Me
 
-Currently, two official plugins are available:
+I am Ayush Gandhi, a developer from India who enjoys solving real-life problems through software.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+I love technology, and I am deeply interested in building products where clean engineering meets practical impact.
 
-## React Compiler
+I am a developer who also knows how to integrate AI into websites and applications to build agentic applications.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+I am still learning, and I will always keep evolving with technology.
 
-## Expanding the ESLint configuration
+I have always been a hustler.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Portfolio Highlights
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This portfolio is designed around four core sections.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* Hero section with rotating focus statements around real-world engineering and intelligent systems
+* About section focused on full-stack development, AI workflows, and continuous growth
+* Projects section featuring applied product builds across web, AI, and automation
+* Contact section for collaboration, freelance work, and networking
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+A Photography page is also included and marked as coming soon.
+
+## Featured Projects
+
+* ACMP: Autonomous Code Modernization Platform for modernizing legacy codebases with AI-assisted analysis and refactoring
+* Sentinel: AI-powered security prototype with rule-based alerts and live dashboard visibility
+* ShopIn: Full-stack e-commerce application
+* Restaurant Delivery: Full-stack ordering and delivery tracking platform
+* Movie App: Performance-focused image experience with React
+
+## Tech Stack
+
+The site and showcased work include:
+
+* React
+* TypeScript
+* Vite
+* GSAP
+* Node.js
+* FastAPI
+* LangChain
+* LangGraph
+* MongoDB
+* Redis
+* Tailwind CSS
+* Python
+
+## Run Locally
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Build For Production
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
+npm run preview
 ```
