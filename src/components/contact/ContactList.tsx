@@ -58,15 +58,21 @@ function ContactItem({
     if (!ref.current) return;
     const iconEl = ref.current.querySelector('.contact-icon') as HTMLElement;
     const valueEl = ref.current.querySelector('.contact-value') as HTMLElement;
+    ref.current.style.borderColor = 'rgba(255,255,255,0.26)';
+    ref.current.style.backgroundColor = 'rgba(255,255,255,0.045)';
+    ref.current.style.transform = 'translateY(-2px)';
     if (iconEl) iconEl.style.color = '#FFFFFF';
-    if (valueEl) { valueEl.style.transform = 'translateX(4px)'; valueEl.style.borderBottom = '1px solid #FFFFFF'; }
+    if (valueEl) valueEl.style.transform = 'translateX(3px)';
   };
   const handleMouseLeave = () => {
     if (!ref.current) return;
     const iconEl = ref.current.querySelector('.contact-icon') as HTMLElement;
     const valueEl = ref.current.querySelector('.contact-value') as HTMLElement;
+    ref.current.style.borderColor = 'rgba(255,255,255,0.1)';
+    ref.current.style.backgroundColor = 'rgba(255,255,255,0.015)';
+    ref.current.style.transform = 'translateY(0)';
     if (iconEl) iconEl.style.color = '#A0A0A0';
-    if (valueEl) { valueEl.style.transform = 'translateX(0)'; valueEl.style.borderBottom = 'none'; }
+    if (valueEl) valueEl.style.transform = 'translateX(0)';
   };
 
   return (
@@ -75,29 +81,38 @@ function ContactItem({
       href={href}
       target={isEmailOrPhone ? undefined : '_blank'}
       rel={isEmailOrPhone ? undefined : 'noopener noreferrer'}
-      style={{ display: 'flex', alignItems: 'center', gap: '16px', textDecoration: 'none' }}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        textDecoration: 'none',
+        border: '1px solid rgba(255,255,255,0.1)',
+        borderRadius: '12px',
+        backgroundColor: 'rgba(255,255,255,0.015)',
+        padding: '12px 14px',
+        transition: 'transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease',
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <span
         className="contact-icon"
-        style={{ color: '#A0A0A0', transition: 'color 0.3s ease', flexShrink: 0 }}
+        style={{ color: '#A0A0A0', transition: 'color 0.3s ease', flexShrink: 0, transform: 'scale(0.88)' }}
       >
         {contactIcons[icon] ?? contactIcons.email}
       </span>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-        <span style={{ fontSize: '0.75rem', color: '#A0A0A0', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-body)' }}>
+        <span style={{ fontSize: '0.67rem', color: '#A0A0A0', textTransform: 'uppercase', letterSpacing: '0.11em', fontFamily: 'var(--font-body)' }}>
           {label}
         </span>
         <span
           className="contact-value"
           style={{
-            fontSize: '1.125rem',
+            fontSize: 'clamp(0.94rem, 2.3vw, 1.02rem)',
             color: '#FFFFFF',
             fontFamily: 'var(--font-heading)',
-            transition: 'transform 0.3s ease, border-bottom 0.3s ease',
+            transition: 'transform 0.25s ease',
             display: 'inline-block',
-            borderBottom: 'none',
           }}
         >
           {value}
@@ -138,7 +153,14 @@ export function ContactList() {
   }, [reducedMotion]);
 
   return (
-    <div ref={listRef} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div
+      ref={listRef}
+      style={{
+        display: 'grid',
+        gap: '12px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+      }}
+    >
       {siteConfig.contact.items.map((item) => (
         <div key={item.label} className="contact-item">
           <ContactItem

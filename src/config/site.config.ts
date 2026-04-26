@@ -56,13 +56,13 @@ export const siteConfig = {
   contact: {
     heading: 'Contact',
     items: [
-      { label: 'Email', value: 'workayush2004@gmail.com', href: 'mailto:workayush2004@gmail.com', icon: 'email' },
-      { label: 'Phone', value: '+91 963 842 4721', href: 'tel:+91 963 842 4721', icon: 'phone' },
-      { label: 'GitHub', value: '@AyushGandhi2004', href: 'https://github.com/AyushGandhi2004', icon: 'github' },
-      { label: 'LinkedIn', value: 'Ayush Gandhi', href: 'https://linkedin.com/in/ayushgandhi', icon: 'linkedin' },
-      { label: 'Instagram', value: '@ayushgandhi', href: 'https://instagram.com/ayushgandhi', icon: 'instagram' },
-      { label: 'X (Twitter)', value: '@ayushgandhi', href: 'https://x.com/ayushgandhi', icon: 'x' },
+      { label: 'Email', value: '', href: 'mailto:workayush2004@gmail.com', icon: 'email' },
+      { label: 'Phone', value: '', href: 'tel:+91 963 842 4721', icon: 'phone' },
+      { label: 'GitHub', value: '', href: 'https://github.com/AyushGandhi2004', icon: 'github' },
+      { label: 'LinkedIn', value: '', href: 'https://www.linkedin.com/in/ayush-gandhi-230620294/', icon: 'linkedin' },
+      { label: 'Instagram', value: '', href: 'https://www.instagram.com/ayushgandhi0301?igsh=MW4wOTdkN2hqZzM1eA==', icon: 'instagram' },
+      { label: 'X (Twitter)', value: '', href: 'https://x.com/AyushGandhi314', icon: 'x' },
     ],
-    closingLine: "Let's build something meaningful.",
+    closingLine: "Code → Create → Evolve",
   },
 } as const;

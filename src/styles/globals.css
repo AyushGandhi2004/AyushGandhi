@@ -74,3 +74,51 @@ button {
   opacity: 0.04;
   mix-blend-mode: soft-light;
 }
+
+.contact-closing-line {
+  position: relative;
+}
+
+.contact-closing-line-text {
+  display: inline-block;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    100deg,
+    rgba(245, 245, 245, 0.9) 0%,
+    rgba(255, 255, 255, 1) 34%,
+    rgba(226, 226, 226, 0.88) 54%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  background-size: 240% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: contact-subtle-shine 6.4s linear infinite;
+}
+
+@keyframes contact-subtle-shine {
+  0% {
+    background-position: 160% 0;
+  }
+
+  40% {
+    background-position: 20% 0;
+  }
+
+  100% {
+    background-position: -60% 0;
+  }
+}
+
+@keyframes contact-caret-blink {
+  0%,
+  49% {
+    opacity: 0.6;
+  }
+
+  50%,
+  100% {
+    opacity: 0.15;
+  }
+}
