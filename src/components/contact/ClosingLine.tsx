@@ -25,9 +25,9 @@ export function ClosingLine() {
     gsap.set(ref.current, { opacity: 0 });
     const anim = gsap.to(ref.current, {
       opacity: 1,
-      duration: 0.8,
+      duration: 1.2,
       ease: 'power2.out',
-      delay: 0.5,
+      delay: 0.8,
       scrollTrigger: {
         trigger: ref.current,
         start: 'top 90%',
