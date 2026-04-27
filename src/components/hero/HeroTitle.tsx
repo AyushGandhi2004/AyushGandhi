@@ -104,6 +104,7 @@ export function HeroTitle() {
 
       <div
         ref={nameRef}
+        data-hero-name
         style={{
           fontFamily: 'var(--font-serif)',
           fontSize: 'clamp(3rem, 8vw, 7rem)',

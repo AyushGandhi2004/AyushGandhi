@@ -8,7 +8,6 @@ export function Home() {
   return (
     <main>
       <Hero />
-      <SectionDivider />
       <About />
       <SectionDivider />
       <Projects />

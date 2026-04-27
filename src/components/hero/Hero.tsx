@@ -14,24 +14,54 @@ export function Hero() {
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    if (!sectionRef.current || !contentRef.current || reducedMotion) return;
+    if (!sectionRef.current || !contentRef.current) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      },
-    });
+    const nameNode = sectionRef.current.querySelector('[data-hero-name]');
+    const indicatorNode = sectionRef.current.querySelector('[data-scroll-indicator]');
 
-    tl.to(contentRef.current, {
-      opacity: 0.3,
-      y: -30,
-      ease: 'none',
-    });
+    if (reducedMotion) {
+      gsap.set(contentRef.current, { opacity: 1, y: 0 });
+      if (nameNode) gsap.set(nameNode, { scale: 1 });
+      if (indicatorNode) gsap.set(indicatorNode, { opacity: 1, y: 0 });
+      return;
+    }
 
-    return () => { tl.kill(); };
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: '+=160%',
+          scrub: true,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
+
+      tl.to(contentRef.current, {
+        opacity: 0.22,
+        y: -45,
+        ease: 'none',
+      }, 0);
+
+      if (indicatorNode) {
+        tl.to(indicatorNode, {
+          opacity: 0,
+          y: 16,
+          ease: 'none',
+        }, 0);
+      }
+
+      if (nameNode) {
+        tl.to(nameNode, {
+          scale: 15,
+          transformOrigin: 'center center',
+          ease: 'none',
+        }, 0.08);
+      }
+    }, sectionRef);
+
+    return () => { ctx.revert(); };
   }, [reducedMotion]);
 
   return (

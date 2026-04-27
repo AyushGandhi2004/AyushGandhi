@@ -39,6 +39,7 @@ export function ScrollIndicator() {
   return (
     <div
       ref={ref}
+      data-scroll-indicator
       style={{
         position: 'absolute',
         bottom: '40px',
