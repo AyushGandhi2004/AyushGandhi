@@ -1,9 +1,50 @@
-import { SectionHeading } from '../layout/SectionHeading';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AboutContent } from './AboutContent';
 import { TechStack } from './TechStack';
 import { siteConfig } from '../../config/site.config';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function About() {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const reducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (!headingRef.current) return;
+
+    if (reducedMotion) {
+      gsap.set(headingRef.current, { scale: 1, y: 0, opacity: 1 });
+      return;
+    }
+
+    const anim = gsap.fromTo(
+      headingRef.current,
+      {
+        scale: 5,
+        y: 0,
+        opacity: 1,
+        transformOrigin: 'center center',
+      },
+      {
+        scale: 1,
+        y: 0,
+        opacity: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: 'top bottom',
+          end: 'bottom center',
+          scrub: true,
+        },
+      },
+    );
+
+    return () => { anim.kill(); };
+  }, [reducedMotion]);
+
   return (
     <section
       id="about"
@@ -14,7 +55,21 @@ export function About() {
       }}
     >
       <div style={{ maxWidth: '760px', margin: '0 auto' }}>
-        <SectionHeading text={siteConfig.about.heading} />
+        <div style={{ overflow: 'visible' }}>
+          <h2
+            ref={headingRef}
+            style={{
+              fontFamily: "'Mitr', var(--font-heading)",
+              fontSize: 'clamp(2.5rem, 7vw, 5rem)',
+              fontWeight: 700,
+              color: '#FFFFFF',
+              textAlign: 'center',
+              lineHeight: 1.1,
+            }}
+          >
+            {siteConfig.about.heading}
+          </h2>
+        </div>
         <div style={{ marginTop: '64px' }}>
           <AboutContent />
         </div>
