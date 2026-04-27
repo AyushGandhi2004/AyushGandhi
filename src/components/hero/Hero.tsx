@@ -70,7 +70,8 @@ export function Hero() {
           mixBlendMode: 'screen',
         }}
       >
-        <div
+        {/* Left and Right Corners */}
+        {/* <div
           style={{
             position: 'absolute',
             top: '-8%',
@@ -95,16 +96,16 @@ export function Hero() {
             opacity: 0.95,
             transform: 'rotate(18deg)',
           }}
-        />
+        /> */}
         <div
           style={{
             position: 'absolute',
             left: '50%',
             top: '56%',
-            width: '70vw',
+            width: '100vw',
             height: '18vw',
             transform: 'translateX(-50%)',
-            background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.16) 28%, rgba(255,255,255,0.08) 48%, transparent 72%)',
+            background: 'radial-gradient(ellipse at center, #ffffff69 0%, rgba(255,255,255,0.16) 28%, rgba(255,255,255,0.08) 48%, transparent 72%)',
             filter: 'blur(20px)',
             opacity: 0.7,
           }}

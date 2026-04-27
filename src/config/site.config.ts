@@ -24,6 +24,7 @@ export const siteConfig = {
   },
   about: {
     heading: 'About Me',
+    resumeHref: 'https://drive.google.com/file/d/1KGTv2CBtaoMpG1DIqB6BYyy0iTPTaI4p/view?usp=sharing',
     paragraphs: [
       {
         text: "I'm Ayush Gandhi, a software developer from India who enjoys building intelligent and scalable digital products. My work sits at the intersection of full-stack development and artificial intelligence, where I design systems that are not just functional but also adaptive and smart. From integrating AI models to creating agent-driven workflows, I focus on building solutions that solve real-world problems.",
@@ -61,7 +62,7 @@ export const siteConfig = {
       { label: 'GitHub', value: '', href: 'https://github.com/AyushGandhi2004', icon: 'github' },
       { label: 'LinkedIn', value: '', href: 'https://www.linkedin.com/in/ayush-gandhi-230620294/', icon: 'linkedin' },
       { label: 'Instagram', value: '', href: 'https://www.instagram.com/ayushgandhi0301?igsh=MW4wOTdkN2hqZzM1eA==', icon: 'instagram' },
-      { label: 'X (Twitter)', value: '', href: 'https://x.com/AyushGandhi314', icon: 'x' },
+      { label: 'X', value: '', href: 'https://x.com/AyushGandhi314', icon: 'x' },
     ],
     closingLine: "Code → Create → Evolve",
   },

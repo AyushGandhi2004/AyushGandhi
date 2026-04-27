@@ -47,7 +47,7 @@ export function SectionHeading({ text, id }: SectionHeadingProps) {
         ref={textRef}
         id={id}
         style={{
-          fontFamily: 'var(--font-heading)',
+          fontFamily: "'Mitr', var(--font-heading)",
           fontSize: 'clamp(2.5rem, 7vw, 5rem)',
           fontWeight: 700,
           color: '#FFFFFF',

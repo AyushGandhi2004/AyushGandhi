@@ -93,7 +93,7 @@ export function HeroTitle() {
         style={{
           fontFamily: 'var(--font-heading)',
           fontSize: 'clamp(1rem, 3vw, 2rem)',
-          fontWeight: 400,
+          fontWeight: 300,
           color: '#FFFFFF',
           marginBottom: '8px',
           letterSpacing: '0.05em',
@@ -108,10 +108,10 @@ export function HeroTitle() {
           fontFamily: 'var(--font-serif)',
           fontSize: 'clamp(3rem, 8vw, 7rem)',
           // fontStyle: 'italic',
-          fontWeight: 500,
+          fontWeight: 550,
           color: '#FFFFFF',
           lineHeight: 1.05,
-          letterSpacing: '0.05em',
+          letterSpacing: '0.1em',
         }}
       >
         {renderNameLines(siteConfig.hero.name)}

@@ -109,7 +109,7 @@ export function Navigation() {
               onClick={(e) => handleNavClick(e, link.href)}
               className="nav-link nav-underline-link"
               style={{
-                color: '#A0A0A0',
+                color: '#C1C1C1',
                 fontSize: '0.875rem',
                 letterSpacing: '0.02em',
                 transition: 'color 0.25s ease',
@@ -146,7 +146,7 @@ export function Navigation() {
             to={siteConfig.nav.photographyHref}
             className="nav-photo nav-underline-link photography-link hidden-mobile"
             style={{
-              color: '#A0A0A0',
+              color: '#C1C1C1',
               fontSize: '0.875rem',
               letterSpacing: '0.02em',
               display: 'flex',

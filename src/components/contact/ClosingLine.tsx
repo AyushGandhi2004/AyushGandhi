@@ -82,7 +82,7 @@ export function ClosingLine() {
       className="contact-closing-line"
       style={{
         fontFamily: 'var(--font-heading)',
-        fontWeight: 600,
+        fontWeight: 400,
         fontSize: 'clamp(1rem, 2.9vw, 1.35rem)',
         textAlign: 'center',
         marginTop: '26px',
