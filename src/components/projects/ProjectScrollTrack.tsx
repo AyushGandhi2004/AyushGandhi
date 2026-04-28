@@ -7,31 +7,101 @@ import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CARD_WIDTH = 680;
-const CARD_GAP = 48;
-const CARD_STRIDE = CARD_WIDTH + CARD_GAP;
-const VERTICAL_STEP = 35;
+const CARD_GAP_DESKTOP = 44;
+const CARD_GAP_MOBILE = 22;
+
+type CardVisualState = {
+  scale: number;
+  y: number;
+  blur: number;
+  opacity: number;
+  zIndex: number;
+  focus: number;
+  glow: number;
+};
+
+const createBaseState = (): CardVisualState => ({
+  scale: 0.92,
+  y: 18,
+  blur: 2.25,
+  opacity: 0.42,
+  zIndex: 0,
+  focus: 0,
+  glow: 0,
+});
 
 export function ProjectScrollTrack() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const measurementFrameRef = useRef<number | null>(null);
   const reducedMotion = usePrefersReducedMotion();
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 768;
+  });
+  const [cardStates, setCardStates] = useState<CardVisualState[]>(() => projects.map(() => createBaseState()));
 
-  const loopedProjects = [...projects];
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    const handleChange = (event: MediaQueryListEvent) => setIsMobile(event.matches);
 
-  const getActiveIndex = useCallback((progress: number) => {
-    const totalCards = loopedProjects.length;
-    const idx = Math.round(progress * (totalCards - 1));
-    return Math.max(0, Math.min(idx, projects.length - 1));
-  }, [loopedProjects.length]);
+    setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  const measureCardStates = useCallback(() => {
+    const viewport = isMobile ? viewportRef.current : sectionRef.current;
+    if (!viewport) return;
+
+    const viewportRect = viewport.getBoundingClientRect();
+    const viewportCenter = viewportRect.left + viewportRect.width / 2;
+    const falloff = isMobile ? Math.max(240, viewportRect.width * 0.34) : Math.max(300, viewportRect.width * 0.42);
+
+    setCardStates(projects.map((_, index) => {
+      const card = cardRefs.current[index];
+
+      if (!card) return createBaseState();
+
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const distance = Math.abs(cardCenter - viewportCenter);
+      const focus = Math.max(0, 1 - distance / falloff);
+      const lift = 18 - focus * 28;
+      const blur = (1 - focus) * 2.2;
+      const scale = 0.91 + focus * 0.14;
+      const opacity = 0.38 + focus * 0.62;
+
+      return {
+        scale,
+        y: lift,
+        blur,
+        opacity,
+        zIndex: Math.round(focus * 20),
+        focus,
+        glow: focus,
+      };
+    }));
+  }, [isMobile]);
+
+  const scheduleMeasure = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    if (measurementFrameRef.current !== null) return;
+
+    measurementFrameRef.current = window.requestAnimationFrame(() => {
+      measurementFrameRef.current = null;
+      measureCardStates();
+    });
+  }, [measureCardStates]);
 
   useEffect(() => {
     if (!sectionRef.current || !trackRef.current || isMobile || reducedMotion) return;
 
-    const totalScrollWidth = loopedProjects.length * CARD_STRIDE;
+    const viewportWidth = sectionRef.current.clientWidth;
+    const totalScrollWidth = Math.max(trackRef.current.scrollWidth - viewportWidth, 0);
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -40,70 +110,91 @@ export function ProjectScrollTrack() {
         scrub: 1,
         start: 'top top',
         end: `+=${totalScrollWidth}`,
-        onUpdate: (self) => {
-          setScrollProgress(self.progress);
-          setActiveIndex(getActiveIndex(self.progress));
+        onUpdate: () => {
+          scheduleMeasure();
         },
       },
     });
 
     tl.to(trackRef.current, {
-      x: -totalScrollWidth + window.innerWidth * 0.5,
+      x: -totalScrollWidth,
       ease: 'none',
     });
 
+    scheduleMeasure();
+
     return () => { tl.kill(); };
-  }, [isMobile, reducedMotion, loopedProjects.length, getActiveIndex]);
+  }, [isMobile, reducedMotion, scheduleMeasure]);
+
+  useEffect(() => () => {
+    if (measurementFrameRef.current !== null) {
+      window.cancelAnimationFrame(measurementFrameRef.current);
+      measurementFrameRef.current = null;
+    }
+  }, []);
 
   useEffect(() => {
     if (!isMobile) return;
 
-    const track = trackRef.current;
-    if (!track) return;
+    const viewport = viewportRef.current;
+    if (!viewport) return;
 
-    const handleScroll = () => {
-      const center = track.scrollLeft + track.clientWidth / 2;
-      const idx = Math.round(center / CARD_STRIDE);
-      setActiveIndex(Math.max(0, Math.min(idx, projects.length - 1)));
+    const handleScroll = () => scheduleMeasure();
+
+    viewport.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    handleScroll();
+
+    return () => {
+      viewport.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
     };
+  }, [isMobile, scheduleMeasure]);
 
-    track.addEventListener('scroll', handleScroll, { passive: true });
-    return () => track.removeEventListener('scroll', handleScroll);
-  }, [isMobile]);
+  useEffect(() => {
+    const onResize = () => scheduleMeasure();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [scheduleMeasure]);
+
+  const renderProjectCards = () => projects.map((project, index) => {
+    const state = cardStates[index] ?? createBaseState();
+
+    return (
+      <div
+        key={project.id}
+        ref={(element) => { cardRefs.current[index] = element; }}
+        style={{
+          flexShrink: 0,
+          scrollSnapAlign: 'center',
+        }}
+      >
+        <ProjectCard
+          project={project}
+          visualState={state}
+        />
+      </div>
+    );
+  });
 
   if (isMobile) {
     return (
       <div
-        ref={trackRef}
+        ref={viewportRef}
+        className="project-mobile-track"
         style={{
           display: 'flex',
-          gap: `${CARD_GAP}px`,
+          gap: `${CARD_GAP_MOBILE}px`,
           overflowX: 'auto',
           scrollSnapType: 'x mandatory',
-          padding: '20px 10vw',
+          padding: '20px 7.5vw 32px',
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
+          WebkitOverflowScrolling: 'touch',
         }}
       >
-        <style>{`.mobile-track::-webkit-scrollbar { display: none; }`}</style>
-        {projects.map((project, i) => (
-          <div
-            key={project.id}
-            style={{
-              scrollSnapAlign: 'center',
-              flexShrink: 0,
-              width: '85vw',
-              transform: `translateY(${(i % 2 === 0 ? -1 : 1) * VERTICAL_STEP * 0.4}px)`,
-            }}
-          >
-            <ProjectCard
-              project={project}
-              isActive={activeIndex === i}
-              scrollProgress={scrollProgress}
-              index={i}
-            />
-          </div>
-        ))}
+        <style>{`.project-mobile-track::-webkit-scrollbar { display: none; }`}</style>
+        {renderProjectCards()}
       </div>
     );
   }
@@ -115,7 +206,8 @@ export function ProjectScrollTrack() {
         height: '100vh',
         overflow: 'hidden',
         position: 'relative',
-        backgroundColor: '#000000',
+        background:
+          'radial-gradient(circle at 50% 35%, rgba(255,255,255,0.08), transparent 34%), radial-gradient(circle at 50% 80%, rgba(255,255,255,0.05), transparent 28%), linear-gradient(180deg, #060606 0%, #000000 55%, #050505 100%)',
       }}
     >
       <div
@@ -123,39 +215,20 @@ export function ProjectScrollTrack() {
           display: 'flex',
           alignItems: 'center',
           height: '100%',
-          paddingLeft: '10vw',
+          width: '100%',
         }}
       >
         <div
           ref={trackRef}
           style={{
             display: 'flex',
-            gap: `${CARD_GAP}px`,
+            gap: `${CARD_GAP_DESKTOP}px`,
+            paddingLeft: 'max(21vw, calc(50vw - 340px))',
+            paddingRight: 'max(21vw, calc(50vw - 340px))',
             willChange: 'transform',
           }}
         >
-          {loopedProjects.map((project, i) => {
-            const relativePos = i - scrollProgress * (loopedProjects.length - 1);
-            const yOffset = relativePos * VERTICAL_STEP;
-            const realIndex = i % projects.length;
-
-            return (
-              <div
-                key={`${project.id}-${i}`}
-                style={{
-                  transform: `translateY(${yOffset}px)`,
-                  transition: 'transform 0.05s linear',
-                }}
-              >
-                <ProjectCard
-                  project={project}
-                  isActive={activeIndex === realIndex && i < projects.length}
-                  scrollProgress={scrollProgress}
-                  index={i}
-                />
-              </div>
-            );
-          })}
+          {renderProjectCards()}
         </div>
       </div>
     </div>
