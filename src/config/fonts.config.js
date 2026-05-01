@@ -1,6 +1,4 @@
-export type FontPairing = 'inter-instrument' | 'inter-only' | 'geist';
-
-export const activeFontPairing: FontPairing = 'inter-instrument';
+export const activeFontPairing = 'inter-instrument';
 
 export const fontPairings = {
   'inter-instrument': {
@@ -21,4 +19,4 @@ export const fontPairings = {
     serif: "'Montserrat', serif",
     mono: "'Geist Mono', monospace",
   },
-} as const;
+};

@@ -8,7 +8,7 @@ import Aurora from './Aurora';
 gsap.registerPlugin(ScrollTrigger);
 
 export function ClosingLine() {
-  const ref = useRef<HTMLParagraphElement>(null);
+  const ref = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
   const fullText = siteConfig.contact.closingLine;
   const [displayedText, setDisplayedText] = useState(reducedMotion ? fullText : '');
@@ -47,9 +47,9 @@ export function ClosingLine() {
     }
 
     let charIndex = 0;
-    let typingInterval: number | undefined;
-    let holdTimer: number | undefined;
-    let restartTimer: number | undefined;
+    let typingInterval;
+    let holdTimer;
+    let restartTimer;
 
     const typeAndLoop = () => {
       charIndex = 0;
@@ -106,11 +106,10 @@ export function ClosingLine() {
           |
         </span>
       </p>
-      
+
+
     </>
-    
-    
-  
-    
+
+
   );
 }

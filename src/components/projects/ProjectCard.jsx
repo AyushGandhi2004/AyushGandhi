@@ -1,26 +1,9 @@
 import React, { useRef } from 'react';
 import { motion } from 'motion/react';
-import type { Project } from '../../config/projects.config';
 import BorderGlow from '../ui/BorderGlow';
 
-interface ProjectCardProps {
-  project: Project;
-  visualState: {
-    scale: number;
-    y: number;
-    blur: number;
-    opacity: number;
-    zIndex: number;
-    focus: number;
-    glow: number;
-  };
-}
-
-export const ProjectCard = React.memo(function ProjectCard({
-  project,
-  visualState,
-}: ProjectCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
+export const ProjectCard = React.memo(function ProjectCard({ project, visualState }) {
+  const cardRef = useRef(null);
 
   return (
     <motion.div
@@ -142,7 +125,7 @@ export const ProjectCard = React.memo(function ProjectCard({
         </div>
       </BorderGlow>
 
-      
+
     </motion.div>
   );
 });

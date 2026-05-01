@@ -13,10 +13,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Photography = lazy(() => import('./pages/Photography').then((m) => ({ default: m.Photography })));
 
-export const LenisContext = createContext<Lenis | null>(null);
+export const LenisContext = createContext(null);
 
 function AppShell() {
-  const [lenis, setLenis] = useState<Lenis | null>(null);
+  const [lenis, setLenis] = useState(null);
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function AppShell() {
 
     lenisInstance.on('scroll', ScrollTrigger.update);
 
-    const tickerFn = (time: number) => lenisInstance.raf(time * 1000);
+    const tickerFn = (time) => lenisInstance.raf(time * 1000);
     gsap.ticker.add(tickerFn);
     gsap.ticker.lagSmoothing(0);
 

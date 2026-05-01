@@ -6,9 +6,9 @@ import { theme } from '../../config/theme.config';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 export function HeroTitle() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const greetingRef = useRef<HTMLDivElement>(null);
-  const nameRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef(null);
+  const greetingRef = useRef(null);
+  const nameRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
 
   const mouseX = useMotionValue(0);
@@ -53,7 +53,7 @@ export function HeroTitle() {
   useEffect(() => {
     if (reducedMotion) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e) => {
       const cx = window.innerWidth / 2;
       const cy = window.innerHeight / 2;
       mouseX.set(e.clientX - cx);
@@ -66,14 +66,14 @@ export function HeroTitle() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY, reducedMotion]);
 
-  const renderWords = (text: string) =>
+  const renderWords = (text) =>
     text.split(' ').map((word, i) => (
       <span key={i} className="word" style={{ display: 'inline-block', marginRight: '0.25em' }}>
         {word}
       </span>
     ));
 
-  const renderNameLines = (text: string) =>
+  const renderNameLines = (text) =>
     text.split(' ').map((word, i) => (
       <div key={i} style={{ display: 'block' }}>
         <span className="word" style={{ display: 'inline-block' }}>

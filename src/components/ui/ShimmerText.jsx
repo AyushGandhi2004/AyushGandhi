@@ -1,11 +1,6 @@
 import React from 'react';
 
-interface ShimmerTextProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export const ShimmerText = React.memo(function ShimmerText({ children, className = '' }: ShimmerTextProps) {
+export const ShimmerText = React.memo(function ShimmerText({ children, className = '' }) {
   return (
     <span className={`shimmer-text ${className}`} style={{ position: 'relative', display: 'inline-block', overflow: 'hidden' }}>
       {children}

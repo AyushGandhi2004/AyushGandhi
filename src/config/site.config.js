@@ -66,4 +66,4 @@ export const siteConfig = {
     ],
     closingLine: "Code → Create → Evolve",
   },
-} as const;
+};

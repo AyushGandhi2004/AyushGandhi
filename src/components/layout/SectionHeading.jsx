@@ -5,14 +5,9 @@ import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface SectionHeadingProps {
-  text: string;
-  id?: string;
-}
-
-export function SectionHeading({ text, id }: SectionHeadingProps) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLHeadingElement>(null);
+export function SectionHeading({ text, id }) {
+  const wrapperRef = useRef(null);
+  const textRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {

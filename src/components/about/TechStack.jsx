@@ -16,7 +16,7 @@ const tailwindIcon = new URL('../../assets/tailwindcss.svg', import.meta.url).hr
 const pythonIcon = new URL('../../assets/python.svg', import.meta.url).href;
 const cppIcon = new URL('../../assets/c++.svg', import.meta.url).href;
 
-const techIcons: Record<string, React.ReactNode> = {
+const techIcons = {
   react: (
     <img
       src={reactIcon}
@@ -118,8 +118,8 @@ const techIcons: Record<string, React.ReactNode> = {
   ),
 };
 
-const TechItem = React.memo(function TechItem({ name, icon }: { name: string; icon: string }) {
-  const ref = useRef<HTMLDivElement>(null);
+const TechItem = React.memo(function TechItem({ name, icon }) {
+  const ref = useRef(null);
 
   const handleMouseEnter = () => {
     if (!ref.current) return;
@@ -164,7 +164,7 @@ const TechItem = React.memo(function TechItem({ name, icon }: { name: string; ic
 });
 
 export function TechStack() {
-  const gridRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {

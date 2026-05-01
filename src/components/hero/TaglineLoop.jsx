@@ -8,7 +8,7 @@ export function TaglineLoop() {
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [cursorVisible, setCursorVisible] = useState(true);
-  const [phase, setPhase] = useState<'waiting' | 'typing' | 'holding' | 'fading'>('waiting');
+  const [phase, setPhase] = useState('waiting');
   const [opacity, setOpacity] = useState(0);
   const reducedMotion = usePrefersReducedMotion();
 

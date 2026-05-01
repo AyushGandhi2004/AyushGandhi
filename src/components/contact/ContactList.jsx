@@ -6,7 +6,7 @@ import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const contactIcons: Record<string, React.ReactNode> = {
+const contactIcons = {
   email: (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
       <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
@@ -39,25 +39,13 @@ const contactIcons: Record<string, React.ReactNode> = {
   ),
 };
 
-function ContactItem({
-  label,
-  value,
-  href,
-  icon,
-  isEmailOrPhone,
-}: {
-  label: string;
-  value: string;
-  href: string;
-  icon: string;
-  isEmailOrPhone: boolean;
-}) {
-  const ref = useRef<HTMLAnchorElement>(null);
+function ContactItem({ label, value, href, icon, isEmailOrPhone }) {
+  const ref = useRef(null);
 
   const handleMouseEnter = () => {
     if (!ref.current) return;
-    const iconEl = ref.current.querySelector('.contact-icon') as HTMLElement;
-    const valueEl = ref.current.querySelector('.contact-value') as HTMLElement;
+    const iconEl = ref.current.querySelector('.contact-icon');
+    const valueEl = ref.current.querySelector('.contact-value');
     ref.current.style.borderColor = 'rgba(255,255,255,0.26)';
     ref.current.style.backgroundColor = 'rgba(255,255,255,0.045)';
     ref.current.style.transform = 'translateY(-2px)';
@@ -66,8 +54,8 @@ function ContactItem({
   };
   const handleMouseLeave = () => {
     if (!ref.current) return;
-    const iconEl = ref.current.querySelector('.contact-icon') as HTMLElement;
-    const valueEl = ref.current.querySelector('.contact-value') as HTMLElement;
+    const iconEl = ref.current.querySelector('.contact-icon');
+    const valueEl = ref.current.querySelector('.contact-value');
     ref.current.style.borderColor = 'rgba(255,255,255,0.1)';
     ref.current.style.backgroundColor = 'rgba(255,255,255,0.015)';
     ref.current.style.transform = 'translateY(0)';
@@ -123,7 +111,7 @@ function ContactItem({
 }
 
 export function ContactList() {
-  const listRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {

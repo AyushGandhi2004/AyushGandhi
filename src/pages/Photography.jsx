@@ -34,8 +34,8 @@ export function Photography() {
           position: 'relative',
           transition: 'color 0.25s ease',
         }}
-        onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#FFFFFF')}
-        onMouseLeave={(e) => ((e.target as HTMLElement).style.color = '#A0A0A0')}
+        onMouseEnter={(e) => (e.target.style.color = '#FFFFFF')}
+        onMouseLeave={(e) => (e.target.style.color = '#A0A0A0')}
       >
         ← Back to Portfolio
       </Link>

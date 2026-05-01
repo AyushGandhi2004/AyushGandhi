@@ -61,9 +61,9 @@ export function Contact() {
           amplitude={5.0}
           speed={1}
         />
-    
+
     </>
 
-    
+
   );
 }

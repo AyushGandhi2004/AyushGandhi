@@ -5,14 +5,14 @@ import { HeroTitle } from './HeroTitle';
 import { TaglineLoop } from './TaglineLoop';
 import { ScrollIndicator } from './ScrollIndicator';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
-import { Plasma } from './Plasma';
+// import { Plasma } from './Plasma';
 import LiquidEther from './LiquidEther';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef(null);
+  const contentRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export function Hero() {
           pointerEvents: 'none',
         }}
       >
-        {/* <Plasma 
+        {/* <Plasma
           color="#7a89a0"
           speed={1}
           direction="forward"
@@ -121,7 +121,7 @@ export function Hero() {
         />
 
       </div>
-      
+
       {/* Radial light glow */}
       <div
         aria-hidden="true"
@@ -186,7 +186,7 @@ export function Hero() {
           }}
         />
       </div>
-      
+
       {/* Centered Content */}
       <div
         ref={contentRef}

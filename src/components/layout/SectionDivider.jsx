@@ -6,7 +6,7 @@ import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 gsap.registerPlugin(ScrollTrigger);
 
 export function SectionDivider() {
-  const lineRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {

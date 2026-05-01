@@ -10,17 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const CARD_GAP_DESKTOP = 44;
 const CARD_GAP_MOBILE = 22;
 
-type CardVisualState = {
-  scale: number;
-  y: number;
-  blur: number;
-  opacity: number;
-  zIndex: number;
-  focus: number;
-  glow: number;
-};
-
-const createBaseState = (): CardVisualState => ({
+const createBaseState = () => ({
   scale: 0.92,
   y: 18,
   blur: 2.25,
@@ -31,21 +21,21 @@ const createBaseState = (): CardVisualState => ({
 });
 
 export function ProjectScrollTrack() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const measurementFrameRef = useRef<number | null>(null);
+  const sectionRef = useRef(null);
+  const viewportRef = useRef(null);
+  const trackRef = useRef(null);
+  const cardRefs = useRef([]);
+  const measurementFrameRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window === 'undefined') return false;
     return window.innerWidth < 768;
   });
-  const [cardStates, setCardStates] = useState<CardVisualState[]>(() => projects.map(() => createBaseState()));
+  const [cardStates, setCardStates] = useState(() => projects.map(() => createBaseState()));
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 767px)');
-    const handleChange = (event: MediaQueryListEvent) => setIsMobile(event.matches);
+    const handleChange = (event) => setIsMobile(event.matches);
 
     setIsMobile(mediaQuery.matches);
     mediaQuery.addEventListener('change', handleChange);

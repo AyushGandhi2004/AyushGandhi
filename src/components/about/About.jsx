@@ -9,7 +9,7 @@ import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 gsap.registerPlugin(ScrollTrigger);
 
 export function About() {
-  const headingRef = useRef<HTMLHeadingElement>(null);
+  const headingRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {

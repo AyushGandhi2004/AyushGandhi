@@ -15,4 +15,4 @@ export const theme = {
     easeInOut: 'power2.inOut',
     stagger: 0.08,
   },
-} as const;
+};

@@ -7,7 +7,7 @@ import { ShimmerText } from '../ui/ShimmerText';
 import { useLenis } from '../../hooks/useLenis';
 
 export function Navigation() {
-  const navRef = useRef<HTMLElement>(null);
+  const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const lenis = useLenis();
@@ -36,12 +36,12 @@ export function Navigation() {
     return () => { tl.kill(); };
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e, href) => {
     if (href.startsWith('#')) {
       e.preventDefault();
       const target = document.querySelector(href);
       if (target && lenis) {
-        lenis.scrollTo(target as HTMLElement, { offset: -80 });
+        lenis.scrollTo(target, { offset: -80 });
       } else if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
       }
@@ -86,7 +86,7 @@ export function Navigation() {
               backgroundColor: '#1a1a1a',
             }}
             onError={(e) => {
-              (e.target as HTMLImageElement).style.display = 'none';
+              e.target.style.display = 'none';
             }}
           />
         </Link>
@@ -115,8 +115,8 @@ export function Navigation() {
                 transition: 'color 0.25s ease',
                 position: 'relative',
               }}
-              onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#FFFFFF')}
-              onMouseLeave={(e) => ((e.target as HTMLElement).style.color = '#A0A0A0')}
+              onMouseEnter={(e) => (e.target.style.color = '#FFFFFF')}
+              onMouseLeave={(e) => (e.target.style.color = '#A0A0A0')}
             >
               {link.label}
               <style>{`
@@ -156,15 +156,15 @@ export function Navigation() {
               transition: 'color 0.25s ease',
             }}
             onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLElement;
+              const el = e.currentTarget;
               el.style.color = '#FFFFFF';
-              const arrow = el.querySelector('.photo-arrow') as HTMLElement;
+              const arrow = el.querySelector('.photo-arrow');
               if (arrow) { arrow.style.transform = 'translateX(4px)'; arrow.style.letterSpacing = '0.5px'; }
             }}
             onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLElement;
+              const el = e.currentTarget;
               el.style.color = '#A0A0A0';
-              const arrow = el.querySelector('.photo-arrow') as HTMLElement;
+              const arrow = el.querySelector('.photo-arrow');
               if (arrow) { arrow.style.transform = 'translateX(0)'; arrow.style.letterSpacing = '0px'; }
             }}
           >

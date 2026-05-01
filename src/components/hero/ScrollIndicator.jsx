@@ -4,7 +4,7 @@ import { siteConfig } from '../../config/site.config';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 export function ScrollIndicator() {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
   const [opacity, setOpacity] = useState(0);
   const reducedMotion = usePrefersReducedMotion();
 

@@ -14,7 +14,7 @@ export function Home() {
       <Projects />
       <SectionDivider />
       <Contact />
-      
+
     </main>
   );
 }

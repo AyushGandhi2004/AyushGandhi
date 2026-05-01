@@ -6,7 +6,7 @@ import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function highlightKeywords(text: string, keywords: readonly string[]): React.ReactNode {
+function highlightKeywords(text, keywords) {
   if (keywords.length === 0) return text;
 
   const sortedKeywords = [...keywords].sort((a, b) => b.length - a.length);
@@ -24,8 +24,8 @@ function highlightKeywords(text: string, keywords: readonly string[]): React.Rea
   });
 }
 
-function ParagraphBlock({ text, keywords }: { text: string; keywords: readonly string[] }) {
-  const ref = useRef<HTMLParagraphElement>(null);
+function ParagraphBlock({ text, keywords }) {
+  const ref = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {

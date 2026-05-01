@@ -1,12 +1,4 @@
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  tech: string[];
-  href: string;
-}
-
-export const projects: Project[] = [
+export const projects = [
   {
     id: 'project-1',
     title: 'ACMP',
