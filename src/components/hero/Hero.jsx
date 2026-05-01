@@ -180,7 +180,7 @@ export function Hero() {
             width: '100vw',
             height: '18vw',
             transform: 'translateX(-50%)',
-            background: 'radial-gradient(ellipse at center, #7a89a0 0%, rgba(255,255,255,0.16) 28%, rgba(255,255,255,0.08) 48%, transparent 72%)',
+            background: 'radial-gradient(ellipse at center, #dddddd 0%, rgba(255,255,255,0.16) 28%, rgba(255,255,255,0.08) 48%, transparent 72%)',
             filter: 'blur(20px)',
             opacity: 0.7,
           }}

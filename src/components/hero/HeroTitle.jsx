@@ -42,7 +42,7 @@ export function HeroTitle() {
     });
 
     tl.to(nameRef.current, {
-      letterSpacing: '0.03em',
+      letterSpacing: '0.05em',
       duration: 1.2,
       ease: 'power2.out',
     }, '+=0.1');
@@ -112,7 +112,7 @@ export function HeroTitle() {
           fontWeight: 650,
           color: '#FFFFFF',
           lineHeight: 1.05,
-          letterSpacing: '0.1em',
+          letterSpacing: '0.2em',
         }}
       >
         {renderNameLines(siteConfig.hero.name)}

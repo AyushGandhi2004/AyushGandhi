@@ -56,10 +56,10 @@ export function Contact() {
         </div>
       </section>
         <Aurora
-          colorStops={["#6f7272","#646e7d","#7a89a0"]}
+          colorStops={["#616264","#4e5054","#dddddd"]}
           blend={0.5}
-          amplitude={5.0}
-          speed={1}
+          amplitude={3.0}
+          speed={1.5}
         />
 
     </>

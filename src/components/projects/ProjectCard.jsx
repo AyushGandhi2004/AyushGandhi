@@ -34,14 +34,14 @@ export const ProjectCard = React.memo(function ProjectCard({ project, visualStat
     >
       <BorderGlow
         edgeSensitivity={30}
-        glowColor="40 80 80"
+        glowColor="0 100 100"
         backgroundColor='linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 45%, rgba(8,8,8,0.96) 100%)'
         borderRadius={18}
-        glowRadius={40}
-        glowIntensity={1}
-        coneSpread={25}
+        glowRadius={80}
+        glowIntensity={0.2}
+        coneSpread={60}
         animated={false}
-        colors={['#ffffff', '#e2e2e2', '#c2c2c2']}
+        colors={['#ffffff', '#b9d1e6', '#9aaecc']}
       >
         <div>
           <h3
