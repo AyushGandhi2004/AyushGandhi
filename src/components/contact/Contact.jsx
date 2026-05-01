@@ -18,7 +18,7 @@ export function Contact() {
           <div style={{ textAlign: 'center' }}>
             <h2
               style={{
-                fontFamily: "'Mitr', var(--font-heading)",
+                fontFamily: "'Montserrat', var(--font-heading)",
                 fontSize: 'clamp(2rem, 5.5vw, 3.2rem)',
                 fontWeight: 700,
                 color: '#FFFFFF',
