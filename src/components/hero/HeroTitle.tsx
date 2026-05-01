@@ -107,9 +107,9 @@ export function HeroTitle() {
         data-hero-name
         style={{
           fontFamily: 'var(--font-serif)',
-          fontSize: 'clamp(3rem, 8vw, 7rem)',
+          fontSize: 'clamp(4rem, 16vw, 7rem)',
           // fontStyle: 'italic',
-          fontWeight: 550,
+          fontWeight: 650,
           color: '#FFFFFF',
           lineHeight: 1.05,
           letterSpacing: '0.1em',

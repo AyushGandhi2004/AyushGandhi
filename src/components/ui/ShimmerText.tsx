@@ -23,7 +23,7 @@ export const ShimmerText = React.memo(function ShimmerText({ children, className
             rgba(255, 255, 255, 0.28) 50%,
             transparent 80%
           );
-          animation: shimmer-sweep 5.5s infinite;
+          animation: shimmer-sweep 3s infinite;
           pointer-events: none;
         }
         @keyframes shimmer-sweep {

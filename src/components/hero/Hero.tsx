@@ -5,6 +5,8 @@ import { HeroTitle } from './HeroTitle';
 import { TaglineLoop } from './TaglineLoop';
 import { ScrollIndicator } from './ScrollIndicator';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
+import { Plasma } from './Plasma';
+import LiquidEther from './LiquidEther';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,13 +81,55 @@ export function Hero() {
         overflow: 'hidden',
       }}
     >
+      {/* Background Plasma */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      >
+        {/* <Plasma 
+          color="#7a89a0"
+          speed={1}
+          direction="forward"
+          scale={2}
+          opacity={0.3}
+          mouseInteractive={true}
+        /> */}
+
+        <LiquidEther
+            colors={[ '#ececec', '#d4d4d4', '#dddddd' ]}
+            mouseForce={15}
+            cursorSize={100}
+            isViscous
+            viscous={30}
+            iterationsViscous={32}
+            iterationsPoisson={31}
+            resolution={0.5}
+            isBounce={true}
+            autoDemo
+            autoSpeed={0.5}
+            autoIntensity={2.2}
+            takeoverDuration={0.25}
+            autoResumeDelay={3000}
+            autoRampDuration={0.6}
+            color0="#9cadc6"
+            color1="#a9b8d0"
+            color2="#adbcd4"
+        />
+
+      </div>
+      
       {/* Radial light glow */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.03) 0%, transparent 70%)',
+          zIndex: 1,
+          background: 'radial-gradient(ellipse at center, #ffffff08 0%, transparent 70%)',
           pointerEvents: 'none',
         }}
       />
@@ -96,6 +140,7 @@ export function Hero() {
         style={{
           position: 'absolute',
           inset: 0,
+          zIndex: 1,
           pointerEvents: 'none',
           mixBlendMode: 'screen',
         }}
@@ -135,16 +180,19 @@ export function Hero() {
             width: '100vw',
             height: '18vw',
             transform: 'translateX(-50%)',
-            background: 'radial-gradient(ellipse at center, #ffffff69 0%, rgba(255,255,255,0.16) 28%, rgba(255,255,255,0.08) 48%, transparent 72%)',
+            background: 'radial-gradient(ellipse at center, #7a89a0 0%, rgba(255,255,255,0.16) 28%, rgba(255,255,255,0.08) 48%, transparent 72%)',
             filter: 'blur(20px)',
             opacity: 0.7,
           }}
         />
       </div>
-          {/* Radial light glow */}
+      
+      {/* Centered Content */}
       <div
         ref={contentRef}
         style={{
+          position: 'relative',
+          zIndex: 2,
           textAlign: 'center',
           display: 'flex',
           flexDirection: 'column',

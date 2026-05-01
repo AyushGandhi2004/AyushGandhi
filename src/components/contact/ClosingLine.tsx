@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { siteConfig } from '../../config/site.config';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
+import Aurora from './Aurora';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -77,32 +78,39 @@ export function ClosingLine() {
   }, [fullText, isReady, reducedMotion]);
 
   return (
-    <p
-      ref={ref}
-      className="contact-closing-line"
-      style={{
-        fontFamily: 'var(--font-heading)',
-        fontWeight: 400,
-        fontSize: 'clamp(1rem, 2.9vw, 1.35rem)',
-        textAlign: 'center',
-        marginTop: '26px',
-        lineHeight: 1.3,
-        minHeight: '1.4em',
-        letterSpacing: '0.01em',
-      }}
-    >
-      <span className="contact-closing-line-text">{displayedText}</span>
-      <span
-        aria-hidden="true"
+    <>
+      <p
+        ref={ref}
+        className="contact-closing-line"
         style={{
-          opacity: reducedMotion ? 0 : 0.6,
-          marginLeft: '2px',
-          color: '#E5E5E5',
-          animation: reducedMotion ? 'none' : 'contact-caret-blink 0.95s steps(1, end) infinite',
+          fontFamily: 'var(--font-heading)',
+          fontWeight: 400,
+          fontSize: 'clamp(1rem, 2.9vw, 1.35rem)',
+          textAlign: 'center',
+          marginTop: '26px',
+          lineHeight: 1.3,
+          minHeight: '1.4em',
+          letterSpacing: '0.01em',
         }}
       >
-        |
-      </span>
-    </p>
+        <span className="contact-closing-line-text">{displayedText}</span>
+        <span
+          aria-hidden="true"
+          style={{
+            opacity: reducedMotion ? 0 : 0.6,
+            marginLeft: '2px',
+            color: '#E5E5E5',
+            animation: reducedMotion ? 'none' : 'contact-caret-blink 0.95s steps(1, end) infinite',
+          }}
+        >
+          |
+        </span>
+      </p>
+      
+    </>
+    
+    
+  
+    
   );
 }
