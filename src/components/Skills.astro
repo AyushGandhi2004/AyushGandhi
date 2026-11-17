@@ -1,0 +1,19 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { skills } from '../config/site';
+---
+
+<section id="skills" class="wrap py-20 md:py-32" aria-labelledby="skills-title">
+  <SectionHeader index="04" id="skills-title" title="Toolkit" />
+
+  <div class="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 md:mt-16 md:grid-cols-5 md:gap-x-8">
+    {skills.map((col) => (
+      <div class="reveal">
+        <h3 class="label border-b border-line pb-3">{col.group}</h3>
+        <ul class="mt-4 space-y-2 text-lg">
+          {col.items.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>

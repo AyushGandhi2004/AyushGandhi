@@ -1,0 +1,48 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { site } from '../config/site';
+---
+
+<header class="sticky top-0 z-40 border-b border-line bg-bg/90 backdrop-blur-sm">
+  <div class="wrap flex h-16 items-center justify-between gap-6">
+    <a href="/" class="font-display text-lg font-bold tracking-tight" aria-label="Ayush Gandhi, home">
+      Ayush Gandhi<span aria-hidden="true" class="text-muted">.</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden md:block">
+      <ul class="flex items-center gap-8 text-sm">
+        {site.nav.map((item) => (
+          <li><a href={item.href} class="link">{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+      <details class="group relative md:hidden">
+        <summary class="flex h-10 cursor-pointer list-none items-center rounded-full border border-line px-4 text-sm [&::-webkit-details-marker]:hidden">
+          <span class="group-open:hidden">Menu</span>
+          <span class="hidden group-open:inline">Close</span>
+        </summary>
+        <nav aria-label="Mobile" class="absolute right-0 top-12 w-56 rounded-2xl border border-line bg-bg p-2 shadow-[0_12px_32px_rgb(0_0_0/0.12)]">
+          <ul>
+            {site.nav.map((item, i) => (
+              <li>
+                <a href={item.href} class="flex items-baseline justify-between rounded-xl px-3 py-3 text-base hover:bg-surface">
+                  {item.label}<span class="label">0{i + 1}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  // Close the mobile menu after choosing a link.
+  document.querySelectorAll('header details a').forEach((a) =>
+    a.addEventListener('click', () => a.closest('details')?.removeAttribute('open'))
+  );
+</script>

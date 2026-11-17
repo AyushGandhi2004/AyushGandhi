@@ -1,42 +1,18 @@
 {
-  "name": "portfolioweb",
+  "name": "ayush-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
   },
   "dependencies": {
-    "@fontsource-variable/geist": "^5.2.8",
-    "@fontsource-variable/geist-mono": "^5.2.7",
-    "@fontsource-variable/inter": "^5.2.8",
-    "@fontsource/fraunces": "^5.2.9",
-    "@fontsource/instrument-serif": "^5.2.8",
-    "@fontsource/inter": "^5.2.8",
-    "@fontsource/jetbrains-mono": "^5.2.8",
-    "@fontsource/montserrat": "^5.2.8",
-    "@gsap/react": "^2.1.2",
-    "gsap": "^3.15.0",
-    "lenis": "^1.3.23",
-    "motion": "^12.38.0",
-    "ogl": "^1.0.11",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.3",
-    "tailwindcss": "^4.2.3",
-    "three": "^0.184.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@tailwindcss/vite": "^4.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^9.39.4",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.5.0",
-    "vite": "^8.0.9"
+    "@astrojs/sitemap": "^3.7.5",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.1",
+    "tailwindcss": "^4.3.5"
   }
 }

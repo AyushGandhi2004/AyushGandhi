@@ -1,0 +1,56 @@
+---
+import { site } from '../config/site';
+---
+
+<section class="wrap pb-16 pt-8 md:pb-24 md:pt-10" aria-labelledby="hero-title">
+  <div class="grid-12 label mb-8 md:mb-10">
+    <span class="col-span-2 md:col-span-3">Portfolio ’{String(new Date().getFullYear()).slice(2)}</span>
+    <span class="col-span-2 text-right md:col-span-3 md:text-left">{site.role}</span>
+    <span class="hidden md:col-span-3 md:block">Based in {site.location}</span>
+    <span class="hidden text-right md:col-span-3 md:block">Index (00)</span>
+  </div>
+
+  <h1
+    id="hero-title"
+    class="font-display font-bold text-[clamp(4.5rem,25vw,22rem)] leading-[0.84] tracking-[-0.055em]"
+  >
+    Ayush<br />Gandhi<span class="text-muted">.</span>
+  </h1>
+
+  <div class="grid-12 mt-10 gap-y-8 md:mt-14">
+    <p class="col-span-4 max-w-xl text-xl leading-snug md:col-span-6 md:col-start-7 md:text-2xl">
+      {site.tagline}
+    </p>
+    <div class="col-span-4 flex flex-wrap gap-3 md:col-span-6 md:col-start-7">
+      <a href="#contact" class="btn btn-solid">Get in touch <span aria-hidden="true">→</span></a>    </div>
+  </div>
+
+  <dl class="grid-12 mt-16 gap-y-6 border-t-2 border-ink pt-4 md:mt-24">
+    <div class="col-span-2 md:col-span-3">
+      <dt class="label">Role</dt>
+      <dd class="mt-1">{site.role}</dd>
+    </div>
+    <div class="col-span-2 md:col-span-3">
+      <dt class="label">Local time</dt>
+      <dd class="mt-1">{site.location} · <span data-clock>--:--</span></dd>
+    </div>
+    <div class="col-span-2 md:col-span-3">
+      <dt class="label">Focus</dt>
+      <dd class="mt-1">{site.focus}</dd>
+    </div>
+    <div class="col-span-2 md:col-span-3">
+      <dt class="label">Status</dt>
+      <dd class="mt-1">
+        {site.available && (
+          <span class="pill">
+            <span class="relative flex h-2 w-2" aria-hidden="true">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-current opacity-60 motion-reduce:animate-none"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-current"></span>
+            </span>
+            {site.availability}
+          </span>
+        )}
+      </dd>
+    </div>
+  </dl>
+</section>

@@ -1,0 +1,56 @@
+---
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  index: number;
+  wide?: boolean;
+}
+const { project, index, wide = false } = Astro.props;
+const { title, summary, year, stack, cover, tone } = project.data;
+const num = String(index + 1).padStart(2, '0');
+---
+
+<article class="reveal group">
+  <a href={`/work/${project.id}/`} class="block" aria-label={`${title} — case study`}>
+    <div class:list={['cover relative aspect-[4/3] overflow-hidden rounded-2xl', wide && 'md:aspect-[21/8]', `cover-${tone}`]}>
+      {cover ? (
+        <Picture
+          src={cover}
+          alt=""
+          formats={['avif', 'webp']}
+          widths={[480, 800, 1200]}
+          sizes={wide ? '92vw' : '(min-width: 768px) 45vw, 92vw'}
+          class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+        />
+      ) : (
+        <div class="flex h-full flex-col justify-between p-5 transition-transform duration-700 ease-out group-hover:scale-[1.03] md:p-8">
+          <div class="flex justify-between font-mono text-xs">
+            <span>({num})</span>
+            <span>{year}</span>
+          </div>
+          <h3 class="font-display text-[clamp(3rem,7vw,6.5rem)] font-bold leading-[0.85] tracking-[-0.05em]">{title}</h3>
+          <ul class="flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs">
+            {stack.slice(0, 4).map((s) => <li>{s}</li>)}
+          </ul>
+        </div>
+      )}
+      <span
+        class="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-ink text-bg opacity-0 transition-all duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 md:right-6 md:top-6"
+        aria-hidden="true">↗</span
+      >
+    </div>
+    {cover ? (
+      <div class="mt-4 grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4">
+        <span class="label">{num}</span>
+        <h3 class="font-display text-2xl font-bold tracking-tight md:text-3xl">{title}</h3>
+        <span class="label">{year}</span>
+        <p class="col-start-2 col-end-4 mt-2 max-w-lg text-muted">{summary}</p>
+      </div>
+    ) : (
+      <p class="mt-4 max-w-lg text-muted">{summary}</p>
+    )}
+  </a>
+</article>
+

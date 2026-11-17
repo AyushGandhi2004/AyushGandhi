@@ -1,0 +1,85 @@
+---
+import { Picture } from 'astro:assets';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const featured = (await getCollection('projects', (p) => p.data.featured)).sort((a, b) => a.data.order - b.data.order);
+  return featured.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, next: featured[(i + 1) % featured.length], index: i },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  next: CollectionEntry<'projects'>;
+  index: number;
+}
+
+const { project, next, index } = Astro.props;
+const { title, summary, year, role, stack, live, repo, cover, tone } = project.data;
+const { Content } = await render(project);
+---
+
+<Base title={`${title} — Case study · Ayush Gandhi`} description={summary}>
+  <article>
+    <header class="wrap pb-12 pt-10 md:pb-16 md:pt-16">
+      <a href="/#work" class="label link">← All work</a>
+      <div class="grid-12 mt-10 items-end gap-y-6 md:mt-14">
+        <span class="label col-span-4 md:col-span-2">({String(index + 1).padStart(2, '0')}) Case study</span>
+        <h1 class="col-span-4 font-display text-[clamp(3.5rem,12vw,11rem)] font-bold leading-[0.86] tracking-[-0.055em] md:col-span-10">
+          <span class="highlight">{title}</span>
+        </h1>
+      </div>
+      <div class="grid-12 mt-8">
+        <p class="col-span-4 max-w-3xl text-xl leading-snug md:col-span-8 md:col-start-3 md:text-2xl">{summary}</p>
+      </div>
+
+      <dl class="grid-12 mt-12 gap-y-6 border-t-[3px] border-[var(--accent-line)] pt-4">
+        <div class="col-span-2 md:col-span-2">
+          <dt class="label">Year</dt>
+          <dd class="mt-1">{year}</dd>
+        </div>
+        <div class="col-span-2 md:col-span-4">
+          <dt class="label">Role</dt>
+          <dd class="mt-1">{role}</dd>
+        </div>
+        <div class="col-span-4 md:col-span-4">
+          <dt class="label">Stack</dt>
+          <dd class="mt-1">{stack.join(' · ')}</dd>
+        </div>
+        <div class="col-span-4 flex flex-wrap gap-2 md:col-span-2 md:justify-end">
+          {live && <a href={live} target="_blank" rel="noopener" class="btn btn-solid py-2 text-sm">Live ↗</a>}
+          {repo && <a href={repo} target="_blank" rel="noopener" class="btn btn-ghost py-2 text-sm">Code ↗</a>}
+        </div>
+      </dl>
+    </header>
+
+    {/* Only show a cover when there's a screenshot; the stack is already in the meta row. */}
+    {cover && (
+      <div class="wrap">
+        <div class:list={['aspect-[16/8] overflow-hidden rounded-2xl', `cover-${tone}`]}>
+          <Picture src={cover} alt={`${title} screenshot`} formats={['avif', 'webp']} widths={[800, 1400, 2000]} sizes="96vw" loading="eager" class="h-full w-full object-cover" />
+        </div>
+      </div>
+    )}
+
+    <div class:list={['wrap grid-12 md:py-16', cover ? 'py-8' : 'pb-8 md:pt-0']}>
+      <div class="prose-case col-span-4 md:col-span-8 md:col-start-3">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <nav aria-label="Next project" class="wrap pb-20 md:pb-28">
+    <a href={`/work/${next.id}/`} class="group block border-t-2 border-ink pt-4">
+      <span class="label">Next project</span>
+      <span class="mt-4 flex items-baseline justify-between gap-6">
+        <span class="font-display text-[clamp(2.75rem,8vw,7rem)] font-bold leading-[0.9] tracking-[-0.05em]">{next.data.title}</span>
+        <span class="text-4xl transition-transform group-hover:translate-x-2 md:text-6xl" aria-hidden="true">→</span>
+      </span>
+    </a>
+  </nav>
+</Base>
+
