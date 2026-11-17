@@ -1,0 +1,47 @@
+---
+import { site } from '../config/site';
+---
+
+<section id="contact" class="wrap pb-16 pt-20 md:pb-24 md:pt-32" aria-labelledby="contact-title">
+  <div class="grid-12 border-t-2 border-ink pt-4">
+    <span class="label col-span-1 md:col-span-2">(06)</span>
+    <span class="label col-span-3 text-right md:col-span-10">Contact</span>
+  </div>
+
+  <h2 id="contact-title" class="reveal mt-10 font-display text-[clamp(3.5rem,11vw,10rem)] font-bold leading-[0.88] tracking-[-0.055em] md:mt-16">
+    Let’s build<br />something<span class="text-muted">.</span>
+  </h2>
+
+  <div class="grid-12 mt-12 gap-y-10 md:mt-20">
+    <div class="col-span-4 md:col-span-6">
+      <p class="label">Email</p>
+      <a href={`mailto:${site.email}`} class="link mt-2 inline-block break-all font-display text-2xl font-bold tracking-tight md:text-4xl">{site.email}</a>
+      <!-- mailto does nothing without a mail app, so offer copy and Gmail instead. -->
+      <div class="mt-5 flex flex-wrap gap-3">
+        <button type="button" data-copy={site.email} class="btn btn-solid py-2.5 text-sm">
+          <span data-copy-label>Copy email</span>
+        </button>
+        <a
+          href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(site.email)}`}
+          target="_blank"
+          rel="noopener"
+          class="btn btn-ghost py-2.5 text-sm">Open in Gmail <span aria-hidden="true">↗</span></a
+        >      </div>
+      <p class="mt-6 max-w-md text-muted">Have a project, a role or an idea worth building? I usually reply within a day.</p>
+    </div>
+
+    <ul class="col-span-4 md:col-span-5 md:col-start-8">
+      {site.socials.map((s) => (
+        <li class="border-b border-line first:border-t">
+          <a href={s.href} target="_blank" rel="noopener me" class="group flex items-baseline justify-between py-4">
+            <span class="text-lg">{s.label}</span>
+            <span class="label flex items-baseline gap-3">
+              {s.handle}
+              <span class="text-ink transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true">↗</span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

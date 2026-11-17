@@ -1,0 +1,29 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { site } from '../config/site';
+---
+
+<section id="photography" class="wrap py-20 md:py-32" aria-labelledby="photos-title">
+  <SectionHeader index="05" id="photos-title" title="Through the lens" aside="Birds, wildlife and nature — what I chase when I'm not coding." />
+
+  <div class="grid-12 mt-10 md:mt-14">
+    <div class="reveal col-span-4 md:col-span-8 md:col-start-3">
+      {site.photographyUrl ? (
+        <a href={site.photographyUrl} target="_blank" rel="noopener" class="btn btn-solid">Visit my photography site <span aria-hidden="true">↗</span></a>
+      ) : (
+        <>
+          <span class="pill">
+            <span class="relative flex h-2 w-2" aria-hidden="true">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-current opacity-60 motion-reduce:animate-none"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-current"></span>
+            </span>
+            Work in progress
+          </span>
+          <p class="mt-5 max-w-xl text-xl leading-snug text-muted md:text-2xl">
+            I'm building a separate site for my photography. It'll be linked here as soon as it's live.
+          </p>
+        </>
+      )}
+    </div>
+  </div>
+</section>

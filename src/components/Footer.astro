@@ -1,0 +1,12 @@
+---
+import { site } from '../config/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line">
+  <div class="wrap flex flex-col gap-3 py-8 text-sm text-muted md:flex-row md:items-center md:justify-between">
+    <p>© {year} {site.name}</p>
+    <p class="label">{site.location} · <span data-clock>--:--</span> IST</p>
+    <p>No trackers, no cookies.</p>
+  </div>
+</footer>

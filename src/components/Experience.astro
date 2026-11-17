@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+
+const entries = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+const kindLabel = { work: 'Work', internship: 'Internship', education: 'Education', award: 'Award' } as const;
+---
+
+<section id="journey" class="wrap py-20 md:py-32" aria-labelledby="journey-title">
+  <SectionHeader index="03" id="journey-title" title="Journey" aside="Where I've studied and worked." />
+
+  <ol class="mt-12 md:mt-16">
+    {entries.map(({ data }) => (
+      <li class="reveal grid-12 gap-y-2 border-b border-line py-7 md:py-9">
+        <span class="label col-span-2 md:col-span-2">{data.period}</span>
+        <span class="col-span-2 text-right md:order-last md:col-span-2">
+          <span class="pill">{kindLabel[data.kind]}</span>
+        </span>
+        <div class="col-span-4 md:col-span-8">
+          <h3 class="font-display text-2xl font-bold tracking-tight md:text-3xl">{data.title}</h3>
+          <p class="mt-2 text-lg text-muted">
+            {data.org}{data.location && <span> · {data.location}</span>}
+          </p>
+          {data.description && <p class="mt-2 max-w-2xl text-muted">{data.description}</p>}
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>

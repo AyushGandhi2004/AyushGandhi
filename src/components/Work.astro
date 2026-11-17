@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+import WorkCard from './WorkCard.astro';
+
+const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const featured = all.filter((p) => p.data.featured);
+const others = all.filter((p) => !p.data.featured);
+---
+
+<section id="work" class="wrap py-20 md:py-32" aria-labelledby="work-title">
+  <SectionHeader index="01" id="work-title" title="Selected work" aside="AI agents, retrieval systems and full-stack products, built end to end." />
+
+  <div class="mt-12 grid gap-x-8 gap-y-14 md:mt-16 md:grid-cols-2 md:gap-y-20">
+    {featured.map((project, i) => {
+      // With an odd count, the first card spans both columns and the rest pair up after it.
+      const leadWide = featured.length % 2 === 1;
+      const wide = leadWide && i === 0;
+      const pos = leadWide ? i - 1 : i;
+      return (
+        <div class:list={[!wide && pos % 2 === 1 && 'md:mt-24', wide && 'md:col-span-2']}>
+          <WorkCard project={project} index={i} wide={wide} />
+        </div>
+      );
+    })}
+  </div>
+
+  <div class="mt-24 md:mt-32">
+    <div class="flex items-baseline justify-between border-b border-ink pb-3">
+      <h3 class="font-display text-2xl font-bold tracking-tight">More projects</h3>
+      <a href="https://github.com/AyushGandhi2004" target="_blank" rel="noopener" class="link text-sm">All on GitHub ↗</a>
+    </div>
+    <ul>
+      {others.map((p) => {
+        // Explicit buttons: Live when there's a live site, GitHub whenever there's a repo.
+        const links = [
+          p.data.live && { label: 'Live', href: p.data.live },
+          p.data.repo && { label: 'GitHub', href: p.data.repo },
+        ].filter((l): l is { label: string; href: string } => Boolean(l));
+        return (
+          <li class="grid grid-cols-[3.5rem_1fr] gap-x-4 gap-y-3 border-b border-line py-5 md:grid-cols-[5rem_14rem_1fr_14rem_11rem] md:items-baseline md:px-3">
+            <span class="label">{p.data.year}</span>
+            <span class="font-medium">{p.data.title}</span>
+            <span class="col-start-2 text-sm text-muted md:col-auto md:text-base">{p.data.summary}</span>
+            <span class="label hidden md:block">{p.data.stack.slice(0, 3).join(' · ')}</span>
+            <span class="col-start-2 flex gap-2 md:col-auto md:justify-end">
+              {links.length > 0 ? (
+                links.map((l) => (
+                  <a
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener"
+                    class="rounded-full border border-line px-3 py-1.5 font-mono text-xs transition-colors hover:border-ink hover:bg-ink hover:text-bg"
+                    aria-label={`${p.data.title} — ${l.label}`}
+                  >
+                    {l.label} ↗
+                  </a>
+                ))
+              ) : (
+                <span class="label">Private</span>
+              )}
+            </span>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>

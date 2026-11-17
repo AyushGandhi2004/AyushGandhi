@@ -1,0 +1,27 @@
+[
+  {
+    "id": "aaspaas",
+    "order": 1,
+    "period": "Aug 2026 — Present",
+    "title": "Software Developer",
+    "org": "AasPaas",
+    "kind": "work"
+  },
+  {
+    "id": "maq-software",
+    "order": 2,
+    "period": "Jan 2026 — Jul 2026",
+    "title": "Associate Software Engineer Intern",
+    "org": "MAQ Software",
+    "location": "Noida",
+    "kind": "internship"
+  },
+  {
+    "id": "daiict",
+    "order": 3,
+    "period": "2022 — 2026",
+    "title": "B.Tech, Information and Communication Technology",
+    "org": "Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)",
+    "kind": "education"
+  }
+]
